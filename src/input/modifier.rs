@@ -13,6 +13,7 @@ use valence::{
 };
 bitflags! {
     #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize), serde(transparent))]
+    /// Currently active modifiers
     #[derive(Resource, Debug, PartialOrd, PartialEq, Eq, Clone, Copy, Hash)]
     pub struct KeyModifiers: u8 {
         const SHIFT = 0b0000_0001;
@@ -25,15 +26,15 @@ bitflags! {
 fn objective_scores_from_modifiers(modifiers: KeyModifiers) -> ObjectiveScores {
     ObjectiveScores::with_map([
         (
-            "shift".to_string(),
+            "Shift".to_string(),
             modifiers.contains(KeyModifiers::SHIFT) as i32,
         ),
         (
-            "ctrl".to_string(),
+            "Ctrl".to_string(),
             modifiers.contains(KeyModifiers::CONTROL) as i32,
         ),
         (
-            "alt".to_string(),
+            "Alt".to_string(),
             modifiers.contains(KeyModifiers::ALT) as i32,
         ),
     ])
@@ -44,8 +45,8 @@ pub fn setup_scoreboard(
     mut commands: Commands,
 ) {
     _ = commands.spawn(ObjectiveBundle {
-        name: Objective::new("modifiers"),
-        display: ObjectiveDisplay("modifiers".color(Color::RED)),
+        name: Objective::new("Modifiers"),
+        display: ObjectiveDisplay("Modifiers".color(Color::RED).underlined()),
         scores: objective_scores_from_modifiers(KeyModifiers::NONE),
         layer: EntityLayerId(layer.single()),
         ..Default::default()

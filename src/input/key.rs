@@ -40,6 +40,7 @@ pub enum KeyCommand {
     Esc,
 }
 
+/// A single key the user has inputed
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Key {
     Backspace,

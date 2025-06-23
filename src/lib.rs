@@ -32,14 +32,23 @@ pub use valence::MINECRAFT_VERSION;
 const PIXEL_SIZE: u32 = 4;
 const HORIZONTAL_SIZE: u32 = 22;
 const VERTICAL_SIZE: u32 = 6;
+
+/// Width of the [`Terminal`] in characters
 pub const WIDTH: u32 = HORIZONTAL_SIZE * 2 * PIXEL_SIZE;
+/// Height of the [`Terminal`] in characters
 pub const HEIGHT: u32 = VERTICAL_SIZE * 2 * PIXEL_SIZE;
+
 const SPAWN_Y: i32 = 64;
 
+/// This can be given as a second argument to [`run`] to indicate that the function doesn't accept [`Event`]s
 pub fn eventless<T>(_: &mut T, _: Event) {}
 
+#[allow(unused_imports)]
+use ratatui::backend::Backend;
+/// Type alias for a ratatui [`Terminal`] containing the custom [`Backend`]
 pub type MinecraftTerm = Terminal<MinecraftTermBackend>;
 
+/// Takes the initial state, function to refresh the ui, and function that handles events  
 pub fn run<
     T: 'static + Send,
     U: FnMut(&mut T, &mut MinecraftTerm) + Send + 'static,

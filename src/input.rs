@@ -25,11 +25,13 @@ use valence::{
 #[derive(Resource)]
 pub struct EventSender(pub SyncCell<Sender<Event>>);
 
+/// [`Key`] and it's [`KeyModifiers`]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Event {
     pub key: Key,
     pub modifiers: KeyModifiers,
 }
+
 pub struct InputPlugin;
 impl Plugin for InputPlugin {
     fn build(&self, app: &mut App) {
